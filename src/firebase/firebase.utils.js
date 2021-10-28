@@ -2,6 +2,10 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
+
+import { signInWithPopup } from "firebase/auth";
+
+
 const config = {
     apiKey: "AIzaSyDhueGdvQREG3T5soWG6BtwLnVwxjIGciQ",
     authDomain: "crown-db-bc8d8.firebaseapp.com",
@@ -45,6 +49,8 @@ export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account '});
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+/* export const signInWithGoogle = () => auth.signInWithPopup(provider); */ //popup box error on closing
+export const signInWithGoogle = () => 
+  signInWithPopup(auth, provider).catch((error) => console.log(error));
 
 export default firebase;
